@@ -1,19 +1,7 @@
-import {compose, pipe} from 'lodash/fp'
-import {Map} from 'immutable'
-import {produce} from 'immer'
+import store from './store'
+import {bugAdded, bugResolved} from './actions'
 
-let book = { 
-    title: "Harry Potter",
-    isPublished: false 
-}
+store.dispatch(bugAdded("Bug_1"))
+store.dispatch(bugResolved(1))
 
-function publish(book) { 
-    return produce(book, draftBook => {
-        draftBook.isPublished = true
-    })
-}
-
-let updated = publish(book)
-
-console.log(book)
-console.log(updated)
+console.log(store.getState())
