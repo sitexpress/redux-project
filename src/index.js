@@ -1,14 +1,19 @@
 import {compose, pipe} from 'lodash/fp'
+import {Map} from 'immutable'
+import {produce} from 'immer'
 
-// const str = " Hello yo " 
-// const type = "div" 
+let book = { 
+    title: "Harry Potter",
+    isPublished: false 
+}
 
-const trim = str => str.trim()
-const wrap = type => str => `<${type}>${str}</${type}>`
-const toLowerCase = str => str.toLowerCase()
+function publish(book) { 
+    return produce(book, draftBook => {
+        draftBook.isPublished = true
+    })
+}
 
+let updated = publish(book)
 
-const transform = pipe(trim, toLowerCase, wrap("div"))
-console.log(input)
-
-// const messege = console.log(toLowerCase(trim(wrap(type, str))))
+console.log(book)
+console.log(updated)
